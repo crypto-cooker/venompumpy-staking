@@ -31,27 +31,27 @@ const LockYZ = () => {
             {/* Page title */}
             <h2 className="text-white text-[32px] font-bold px-3 text-center mb-10">STAKE VPUMPY TOKEN</h2>
             <div className="flex justify-center font-bold text-[28px]">
-              <Image
-                className="z-[-9999] mx-7 max-[460px]:m-auto"
-                src="./icon/yieldz_small.svg"
+              <img
+                className="z-[-9999] mx-7 max-[460px]:m-auto rounded-full"
+                src="./icon/vpumpylogo.jpg"
                 alt="slider pannel"
                 width={60}
                 height={36.38}
               />
-              <h4 className="my-auto">{yzBalance} VM</h4>
+              <h4 className="my-auto">{yzBalance} VP</h4>
             </div>
             <div className="min-[658px]:flex min-[658px]:justify-between max-[666px]:grid-col-3 align-middle py-[25px] border-[1px] rounded-xl bg-white/5  border-white/10 m-3 max-md:w-[100%] max-md:mx-0">
               <div className="col-span-1 min-[460px]:flex flex-row items-center justify-center content-center max-[658px]:mb-7">
-                <Image
-                  className="z-[-9999] mx-7 max-[460px]:m-auto"
-                  src="./icon/yieldz_small.svg"
+                <img
+                  className="z-[-9999] mx-7 max-[460px]:m-auto rounded-full"
+                  src="./icon/vpumpylogo.jpg"
                   alt="slider pannel"
                   width={40}
                   height={36.38}
                 />
                 <div className="flex max-[460px]:m-auto max-[460px]:justify-center ">
                   <h2 className="text-white mr-3 text-[20px] my-auto uppercase font-bold text-center leading-3">
-                    VM
+                    VP
                   </h2>
                   <input
                     type="number"

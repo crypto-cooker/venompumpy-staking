@@ -64,12 +64,11 @@ const Boosted = () => {
                 <div className="bg-white/5 border-b-[1px] border-white/10 rounded-xl flex w-full h-[43px] align-middle pl-4">
 
                   <h4 className="text-white font-semibold text-[20px] m-auto">
-                    Current pool
+                    Current STAKED NFTs
                   </h4>
 
                 </div>
               </div>
-              {/* Distributed Rewards Ended */}
             </div>
           </div>
         </div>
