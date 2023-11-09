@@ -107,7 +107,7 @@ const Boosted = () => {
               InputProps={{
                 readOnly: true,
                 startAdornment: (
-                  <InputAdornment position="start">YZ</InputAdornment>
+                  <InputAdornment position="start">VP</InputAdornment>
                 ),
               }}
             />

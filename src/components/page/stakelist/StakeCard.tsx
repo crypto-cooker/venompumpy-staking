@@ -1,8 +1,6 @@
 import GraButton from "@/components/common/Buttons";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import Image from "next/image";
-import Web3 from "web3";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,10 +9,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import { ethers } from "ethers";
-import { API_URL, REWARD_CLAIM_PERIOD } from "@/config";
-import { getCurrentBlockTime } from "@/utils";
-import axios from "axios";
 /**
  *
  * @returns New StakeCard Jsx Component
@@ -33,14 +27,6 @@ interface StakeCardProps {
   rateForFour: number;
   rateForTwo: number;
 }
-
-// export const StakeCard: React.FC<StakeCardProps> = ({
-//   amount,
-//   leftRewardClaim,
-//   leftStakingPeriod,
-//   unlockFee,
-//   rewards,
-
 const myround = (amount: string) => {
   //in: String
   const samount =
@@ -70,19 +56,7 @@ const toHHMMSS = (sec_num: number) => {
   }
   return hours + ":" + minutes + ":" + seconds;
 };
-export const StakeCard: React.FC<StakeCardProps> = ({
-  id,
-  transId, //backend
-  staker,
-  stakeTime,
-  lockTime,
-  amount,
-  rate,
-  reward, //from backend
-  fee, //from backend
-  rateForFour,
-  rateForTwo,
-}) => {
+export const StakeCard: React.FC<StakeCardProps> = () => {
   // To get stake infos ... amount, leftRewardClaim,....
   const [totalStaked, settotalStaked] = useState<number>(0);
   const [rewardClaim, setrewardClaim] = useState<number>(60 * 60 * 6);
@@ -102,18 +76,7 @@ export const StakeCard: React.FC<StakeCardProps> = ({
 
   // getCurrentBlockTime().then(console.log);
   const handleClickClaim = async () => {
-    let claimable = false;
-    try {
-      claimable = await byzContract.claimable(address, id);
-      if (claimable) {
-        onClaim();
-      } else {
-        setOpenClaim(true);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Transaction Error!");
-    }
+    
   };
   const handleClose = () => {
     setOpenWithdraw(false);
@@ -135,106 +98,17 @@ export const StakeCard: React.FC<StakeCardProps> = ({
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rewardClaim]);
-
-  useEffect(() => {
-    if (web3Provider) initCard();
-  }, [web3Provider]);
-
-  //Initial Component
-  const initCard = async () => {
-
-    const totalPeriod = rate.toString() == rateForFour.toString() ? 40 : 20;
-    settotalPeriod(totalPeriod);
-
-    let current = await getCurrentBlockTime();
-
-    const leftLockPeriod = Math.floor((lockTime - current) / 60 / 60 / 24);
-    const leftClaimTime =
-      Math.floor(lockTime - current) % (60 * 60 * REWARD_CLAIM_PERIOD);
-
-    if (amount != 0) {
-      const temp = amount / 10.0 ** 18;
-      settotalStaked(parseFloat(myround(temp.toString())));
-      if (current > lockTime) {
-        setrewardClaim(60 * 60 * REWARD_CLAIM_PERIOD);
-        setstakingPeriod(-1);
-      } else {
-        setstakingPeriod(leftLockPeriod); //test
-        setrewardClaim(leftClaimTime);
-      }
-      getReward(); //get Rewards from contrat
-    } else {
-      settotalStaked(0);
-      setstakingPeriod(-1);
-    }
-  };
   // Get Rewards as BYZ from Contract
   const getReward = async () => {
-    try {
-      let rewards = ethers.utils.formatUnits(
-        await byzContract.getReward(address, id)
-      );
-      let preWithdrawPercent = await byzContract.getPreWithdrawPercent(
-        address,
-        id
-      );
-
-      axios
-        .post(`${API_URL}yieldz/rewards`, {
-          _id: transId,
-          reward: rewards,
-        })
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
-      setbyzrewards(parseFloat(rewards).toFixed(5));
-      setunlockFee(preWithdrawPercent / 10);
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
   /**
    * 2023.3.23 Twinstar Added
    * post claim data to backend
    */
   const onWithdraw = async () => {
-    try {
-      const withdraw = await byzContract.withdraw(id);
-      await withdraw.wait();
-      const currentBlockTime = await getCurrentBlockTime();
-      byzContract.on("Withdraw", (sender, count) => {
-        axios
-          .post(`${API_URL}/yieldz/withdraw`, { _id: transId })
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-      });
-      setiswithDraw(true);
-      setOpenWithdraw(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // Claim Button Click Event Listener
-  const onClaim = async () => {
-    // handleClickWithdraw();
-    if (parseFloat(byzrewards) == 0) {
-      toast.error("There is nothing to get rewards!");
-      return;
-    }
-    try {
-      const currentBlockTime = await getCurrentBlockTime();
-      const claim = await byzContract.claim(id);
-      await claim.wait();
-      byzContract.on("Claim", (sender, count) => {
-        axios
-          .post(`${API_URL}/yieldz/claimbyz`, { _id: transId })
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    setbyzrewards("0");
-  };
+    
+  }
 
   return (
     !iswithDraw && (
