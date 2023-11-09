@@ -1,5 +1,4 @@
 import { TraButton } from "../common/Buttons";
-import { Web3Button } from "../ui/Web3Button";
 import React from "react";
 import Image from "next/image";
 

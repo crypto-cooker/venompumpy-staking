@@ -1,7 +1,5 @@
 import { StakeCard } from "@/components/page/stakelist/StakeCard";
 import React, { useEffect, useState } from "react";
-import { useWeb3Context } from "@/context/Web3Context";
-import { API_URL } from "@/config";
 
 const StakeList = () => {
   const [stakedList, setstakedList] = useState([]);
@@ -9,63 +7,6 @@ const StakeList = () => {
   const [rateForFour, setrateForFour] = useState(0);
   const [rateForTwo, setrateForTwo] = useState(0);
 
-  const { web3Provider, address, yzContract, byzContract, sContract } =
-    useWeb3Context();
-  useEffect(() => {
-    if (web3Provider) {
-      // getStakedInfoList();
-      getStakedInfoFetch();
-    }
-  }, [web3Provider]);
-
-  /**
-   * Get Staked Informations from Backend
-   */
-  const getStakedInfoFetch = async () => {
-    //Twinstar added 3.16
-    try {
-      setrateForTwo(await byzContract.rateForTwo());
-      setrateForFour(await byzContract.rateForFour());
-    } catch (error) {
-      console.log(error);
-    }
-    const res = await fetch(`${API_URL}yieldz/stakelist/${address}`)
-      .then((res) => res.json())
-      .then((response) => {
-        const templist = response;
-        console.log(templist);
-        setstakedList(templist);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    return res;
-  };
-  /**
-   * Get Staked Informations from Contract
-   */
-  const getStakedInfoList = async () => {
-    //Twinstar added 3.16
-    try {
-      setrateForTwo(await byzContract.rateForTwo());
-      setrateForFour(await byzContract.rateForFour());
-    } catch (error) {
-      console.log(error);
-    }
-
-    //  staker address, stakeTime uint256, lockTime uint256, amount uint256, rate uint256  by props:id
-    let templist = [];
-    for (let index = 0; ; index++) {
-      try {
-        const stakedItem = await byzContract.userData(address, index);
-        templist.push(stakedItem);
-      } catch {
-        break;
-      }
-    }
-    setstakedList(templist);
-    console.log(templist);
-  };
 
   return (
     <>
@@ -77,8 +18,8 @@ const StakeList = () => {
             <h6 className="text-[#898CA9] text-[16px] font-normal">
               Description of stake list.
             </h6>
-            {web3Provider
-              ? stakedList.map((item, index) => {
+            {
+             stakedList.map((item, index) => {
                   return (
                     <StakeCard
                       key={index}
@@ -95,8 +36,7 @@ const StakeList = () => {
                       rateForTwo={rateForTwo}
                     ></StakeCard>
                   );
-                })
-              : "Disconnected"}
+                })}
             {/*  */}
           </div>
         </div>

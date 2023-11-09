@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TraButton } from "../common/Buttons";
-import { Web3Button } from "../ui/Web3Button";
 interface props {
   color: number;
 }
@@ -17,7 +16,6 @@ const Header = ({ color }: props) => {
                 <span className="text-[#1BF57F] ">V</span>enom <span className="text-[#1BF57F] ">P</span>umpy
               </h2>
             </Link>
-            <Web3Button color={color} />
           </div>
         </nav>
       </header>

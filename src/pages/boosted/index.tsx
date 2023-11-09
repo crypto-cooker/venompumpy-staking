@@ -13,191 +13,37 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-
-import {
-  API_URL,
-  ERROR_CLAIM_BYIELDZ_SLOWMODE,
-  ERROR_DEPOSIT_BYIELDZ_SLOWMODE,
-  STAKE_ADDRESS,
-} from "@/config";
-import { ethers } from "ethers";
-import { useWeb3Context } from "@/context/Web3Context";
-import axios from "axios";
-import { getCurrentBlockTime } from "@/utils";
 import Head from "next/head";
-const myround = (amount: string) => {
-  //in: String
-  const samount =
-    Math.round((parseFloat(amount) + Number.EPSILON) * 100000) / 100000;
-  return samount.toString(); //out: string 100.0020030442 -> 100.002
-};
 const Boosted = () => {
   const [eth, setEth] = useState("");
   const [usdt, setUsdt] = useState("");
-  const [byz, setByz] = useState("");
-  const [rewardCore, setrewardCore] = useState("0");
-  const [rewardShdw, setrewardShdw] = useState("0");
-  const [stakedAmount, setstakedAmount] = useState("0");
 
   const [depositAmount, setDepositAmount] = useState<number>();
 
   const [openClaim, setOpenClaim] = React.useState(false);
 
-  const {
-    provider,
-    web3Provider,
-    address,
-    yzContract,
-    byzContract,
-    sContract,
-  } = useWeb3Context();
 
   const handleClose = () => {
     setOpenClaim(false);
   };
-  const handleClickClaim = async () => {
-    let claimable = false;
-    try {
-      claimable = await sContract.claimable(address);
-      if (claimable) {
-        onClaim();
-      } else {
-        setOpenClaim(true);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Transaction Error!");
-    }
-  };
-  useEffect(() => {
-    if (web3Provider) {
-      getCurrentPool();
-      getYZBalance();
-      getStakedAmount();
-      getPendingReward();
-    }
-    // if (!netstatus) {
-    //   return;
-    // }
-  }, [web3Provider]);
   const handleChange = (event) => {
     if (event.target.value < 0) return;
     setDepositAmount(event.target.value);
   };
   const getCurrentPool = async () => {
-    try {
-      const poolAmount = await sContract.getVaultBalance();
-      const ethBalance = ethers.utils.formatUnits(poolAmount[0]);
-      const shdwBalane = ethers.utils.formatUnits(poolAmount[1]);
-      setEth(myround(ethBalance));
-      setUsdt(myround(shdwBalane));
-    } catch (error) {
-      console.log(error);
-      return;
-    }
+   
   };
   const getYZBalance = async () => {
-    try {
-      const byzAmount = ethers.utils.formatUnits(
-        await byzContract.balanceOf(address)
-      );
-
-      setByz(myround(byzAmount));
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
   const getStakedAmount = async () => {
-    try {
-      const stakedAmount = await sContract.userInfo(address);
-      let amount = ethers.utils.formatUnits(stakedAmount[0]);
-      setstakedAmount(amount);
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
   const getPendingReward = async () => {
-    try {
-      const rewardAmount = await sContract.pendingReward(address);
-      const ethBalance = ethers.utils.formatUnits(rewardAmount[0]);
-      const shdwBalane = ethers.utils.formatUnits(rewardAmount[1]);
-      setrewardCore(myround(ethBalance));
-      setrewardShdw(myround(shdwBalane));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const onDeposit = async () => {
-    if (depositAmount > parseFloat(byz)) {
-      toast.error("Stake amount is exceeded !");
-      return;
-    }
-    if (depositAmount <= 0 || depositAmount === undefined) {
-      toast.error("Input the correct amount to stake!");
-      return;
-    }
-    const sAmount = ethers.utils.parseEther(depositAmount.toString());
-    const stakeApprove = await byzContract.approve(STAKE_ADDRESS, sAmount);
-    try {
-      const depoist = await sContract.deposit(sAmount);
-      await depoist.wait();
-
-      sContract.on("Deposit", async (sender, amount) => {
-        const stakeTime = await getCurrentBlockTime();
-
-        const depositData = {
-          address: sender,
-          amount: sAmount.toString(),
-          stakeTime: stakeTime.toString(),
-        };
-        console.log(depositData);
-        axios
-          .post(`${API_URL}byieldz/depositbyz`, depositData)
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-        toast.success("Success BYZ Staking!");
-      });
-    } catch (error) {
-      console.log(error.reason);
-      if (error.reason.includes("Slow Mode") == true) {
-        toast.error(ERROR_DEPOSIT_BYIELDZ_SLOWMODE);
-      }
-    }
-    getYZBalance();
-    getStakedAmount();
-    setDepositAmount(0);
+    
   };
   const onClaim = async () => {
-    if (parseFloat(rewardCore) == 0 || parseFloat(rewardShdw) == 0) {
-      toast.error("There is nothing to get rewards!");
-      return;
-    }
-    const claimtime = await getCurrentBlockTime();
-    console.log(claimtime);
-    try {
-      const depoist = await sContract.deposit(0);
-      await depoist.wait();
-      sContract.on("Claim", (sender, amount) => {
-        if (amount != 0) return;
-        const depositData = {
-          address: sender,
-          core: rewardCore,
-          shdw: rewardShdw,
-          claimtime: claimtime.toString(),
-        };
-        console.log(depositData);
-        axios
-          .post(`${API_URL}byieldz/rewards`, depositData)
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-        toast.success("Success Claim Rewards");
-        getPendingReward();
-      });
-    } catch (error) {
-      if (error.reason.includes("Slow Mode")) {
-        toast.error(ERROR_CLAIM_BYIELDZ_SLOWMODE);
-      }
-    }
+    
   };
   return (
     <>
@@ -222,9 +68,6 @@ const Boosted = () => {
                   </h4>
 
                 </div>
-                <h2 className="text-white text-[32px] uppercase font-bold text-center my-[5%]  leading-10 flex-row justify-center">
-                  {web3Provider ? `${eth} CORE + ${usdt} SHDW` : "Disconnected"}
-                </h2>
               </div>
               {/* Distributed Rewards Ended */}
             </div>

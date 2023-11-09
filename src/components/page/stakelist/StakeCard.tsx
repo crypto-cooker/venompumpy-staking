@@ -11,7 +11,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useWeb3Context } from "@/context/Web3Context";
 import { ethers } from "ethers";
 import { API_URL, REWARD_CLAIM_PERIOD } from "@/config";
 import { getCurrentBlockTime } from "@/utils";
@@ -94,15 +93,6 @@ export const StakeCard: React.FC<StakeCardProps> = ({
   const [iswithDraw, setiswithDraw] = useState<boolean>(false);
   const [openWithdraw, setOpenWithdraw] = React.useState(false);
   const [openClaim, setOpenClaim] = React.useState(false);
-
-  const {
-    provider,
-    web3Provider,
-    address,
-    yzContract,
-    byzContract,
-    sContract,
-  } = useWeb3Context();
 
   const handleClickWithdraw = () => {
     setOpenWithdraw(true);

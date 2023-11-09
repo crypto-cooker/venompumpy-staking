@@ -1,91 +1,21 @@
 import GraButton from "@/components/common/Buttons";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import Myoption from "../../components/ui/optionbar";
-
-import { toast } from "react-toastify";
-import { API_URL, BYIELDZ_ADDRESS } from "@/config";
-import { ethers } from "ethers";
-import { useWeb3Context } from "@/context/Web3Context";
-import axios from "axios";
+import { useState} from "react";
 import Head from "next/head";
 
-const myround = (amount: string) => {
-  //in: String
-  const samount =
-    Math.round((parseFloat(amount) + Number.EPSILON) * 10000) / 10000;
-  return samount.toString(); //out: string 100.0020030442 -> 100.002
-};
 const LockYZ = () => {
-  const [selected, setSelected] = useState<string>("40 Days");
-  const [point, setPoint] = useState<boolean>(false);
   const [stakeAmount, setstakeAmount] = useState<string>("");
   const [yzBalance, setyzBalance] = useState<string>("0");
-  const {
-    provider,
-    web3Provider,
-    address,
-    network,
-    yzContract,
-    byzContract,
-    sContract,
-  } = useWeb3Context();
-
   const handleChange = (event) => {
     const val = event.target.value;
     setstakeAmount(val);
   };
 
-  useEffect(() => {
-    if (web3Provider) {
-      getBalance();
-    }
-  }, [web3Provider]);
 
   const getBalance = async () => {
-    const yzBalance = ethers.utils.formatUnits(
-      await yzContract.balanceOf(address)
-    );
-    setyzBalance(yzBalance.toString());
   };
 
   const onStake = async () => {
-    console.log("on stake");
-    if (parseFloat(stakeAmount) <= 0 || stakeAmount == "") {
-      toast.error("Enter the correct stake amount !");
-      return;
-    }
-    const sAmount = ethers.utils.parseEther(stakeAmount);
-    const stakeApprove = await yzContract.approve(BYIELDZ_ADDRESS, sAmount);
-    const [lockPeriod, rate] = selected == "40 Days" ? [40, 12] : [20, 11];
-    // const rate = selected == "40 Days" ? 12: 11;
-
-    try {
-      const stake = await byzContract.stake(sAmount, lockPeriod);
-      await stake.wait();
-      byzContract.on("Stake", (sender, amount, lockPeriod, timestamp) => {
-        const stakeData = {
-          address: sender,
-          amount: amount.toString(),
-          stakeTime: timestamp.toString(),
-          rate: rate,
-          lockTime: parseInt(lockPeriod) * 24 * 60 * 60 + parseInt(timestamp),
-        };
-        console.log(stakeData);
-        axios
-          .post(`${API_URL}yieldz/stakeyz`, stakeData)
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-        toast.success("Success Staking!");
-        getBalance();
-        setstakeAmount("");
-        setyzBalance((parseInt(yzBalance) - parseInt(stakeAmount)).toFixed(5));
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    // console.log(stake)
   };
   return (
     <>
@@ -128,7 +58,6 @@ const LockYZ = () => {
                     className="w-[150px] rounded-md text-[#47fd80]  border-[1px] border-white/30 px-3 text-center text-[20px] my-auto uppercase font-bold leading-3 bg-[rgba(0,0,0,0)] mr-5"
                     value={stakeAmount}
                     onChange={(e) => handleChange(e)}
-                    disabled={!web3Provider}
                   ></input>
                 </div>
               </div>
@@ -139,7 +68,6 @@ const LockYZ = () => {
               <GraButton
                 className="w-[184px] h-[50px] font-semibold text-[22px]"
                 onClick={onStake}
-                disabled={!web3Provider}
               >
                 Stake now
               </GraButton>
