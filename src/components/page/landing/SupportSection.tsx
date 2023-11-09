@@ -19,23 +19,8 @@ const SupportSection = (props: Props) => {
         height={500}
       />
       <div className={styles.gradient3}></div>
-      {/* <Image
-            className="z-[-9999] absolute bottom-0 left-0 w-[44%] object-cover"
-            src="./images/footer_gra.svg"
-            alt="slider pannel"
-            width={500}
-            height={500}
-          /> */}
       <div className="grid grid-cols-3 px-32 mb-20 md:py-10">
         <div className="md:px-16 px-0 md:w-[30%] w-[100%] mt-10">
-          <ConnectButton
-            className="w-[304px] h-[56px] mt-10"
-            onClick={() => {
-              router.push("https://discord.com/invite/t7J8wqFMju");
-            }}
-          >
-            Discord
-          </ConnectButton>
           <h2 className="text-[14px] text-[#898CA9]">
             ©2023 VENOMPUMPY, All right reserved.
           </h2>
@@ -58,10 +43,6 @@ const SupportSection = (props: Props) => {
               Telegram
             </Link>
           </h2>
-        </div>
-        <div className="text-[14px] px-22 md:w-[40%] w-[70%] mt-10 text-[#898CA9] ">
-          <Link href="#" className="underline"><h2>Privacy Policy and Terms of Service</h2></Link>
-          <Link href="#" className="underline"><h2>Venom Privacy Policy</h2></Link>
         </div>
       </div>
     </section>

@@ -47,15 +47,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
           className="fixed z-[10] w-[100%] h-[100%] bg-[rgba(0,0,0,0.6)] backdrop-blur-sm flex justify-center pt-[100px]"
         >
           <div className="relative">
-            <div className="flex ml-[15px] text-[24px] font-Montserrat font-[600] mb-[30px]">
-              <Image
-                src="./images/hostinglogo.svg"
-                alt="logo"
-                width={126}
-                height={65}
-                className="mr-[10px]"
-              />
-            </div>
+            
             <Link
               href="dashboard"
               className="flex align-middle cursor-pointer mt-[20px] ml-8 hover:bg-[url('/images/${btnBack}')] active:bg-[url('/images/${btnBack}')] active:hue-rotate-90 bg-no-repeat bg-left-top w-[233px] h-[56px] py-[16px] pl-[25px]"
@@ -85,7 +77,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
                 height={24}
               />
               <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                Lock VM
+                STAKE VPUMPY TOKEN
               </h2>
             </Link>
             <Link

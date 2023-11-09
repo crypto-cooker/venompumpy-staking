@@ -1,102 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
-import GraButton from "@/components/common/Buttons";
-import { Switch } from "@headlessui/react";
+import { useEffect } from "react";
 import Image from "next/image";
-import MultiLineChart from "@/components/ui/MultiLineChart";
-import Link from "next/link";
-import { ethers } from "ethers";
-import { useWeb3Context } from "@/context/Web3Context";
-import { YIELDZ_ABI, YIELDZ_ADDRESS } from "@/config";
+
 import Head from "next/head";
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-const myround = (amount: string) => {
-  //in: String
-  const samount =
-    Math.round((parseFloat(amount) + Number.EPSILON) * 10000) / 10000;
-  return samount.toString(); //out: string 100.0020030442 -> 100.002
-};
 
 const Dashboard = () => {
-  const [agreed, setAgreed] = useState(false);
-  const [totalSupply, settotalSupply] = useState("0");
-  const [lockYieldz, setlockYieldz] = useState("0");
-  const [marketCap, setmarketCap] = useState("0");
-  const [lockedPercent, setlockedPercent] = useState(0);
-
-  const [totalStakers, setTotalStakers] = useState("0");
-  const [distributedCore, setDistributedCore] = useState("0");
-  const [distributedShdw, setDistributedShdw] = useState("0");
-  const [yzPrice, setyzPrice] = useState("0");
-  const { yzContract, byzContract, sContract } = useWeb3Context();
 
   useEffect(() => {
     getDashboardInfo();
   }, []);
 
-  async function getTotalSupply() {
-    return ethers.utils.formatUnits(await yzContract.totalSupply());
-  }
-  async function getLockedYieldz() {
-    const lockedYZ = ethers.utils.formatUnits(
-      await byzContract.lockedYZAmount()
-    );
-    return lockedYZ;
-  }
-  async function getTotalStakers() {
-    const totalStakers = await sContract.totalStaker();
-    return totalStakers.toNumber();
-  }
-  async function getDistributedCores() {
-    const distCores = ethers.utils.formatUnits(
-      await sContract.distributedETH() // ETH -> Core   Contract Function
-    );
-    return distCores;
-  }
-  async function getDistributedShdws() {
-    const distShdws = ethers.utils.formatUnits(
-      await sContract.distributedSHDW() // ETH -> Core   Contract Function
-    );
-    return distShdws;
-  }
-
-  const getYZPrice = async () => {
-    const res = await fetch(
-      `https://api.dexscreener.com/latest/dex/tokens/${YIELDZ_ADDRESS}`
-    )
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    return res;
-  };
   const getDashboardInfo = async () => {
-    // Get total supply
-    const totalSupplyData = getTotalSupply();
-    const lockedYieldzData = getLockedYieldz();
-    const totalStakerData = getTotalStakers();
-    const distCoreData = getDistributedCores();
-    const distShdwData = getDistributedShdws();
-    const [totalSupply, lockedYieldz, totalStakers, distCores, distShdws] =
-      await Promise.all([
-        totalSupplyData,
-        lockedYieldzData,
-        totalStakerData,
-        distCoreData,
-        distShdwData,
-      ]);
-    // live:.cid.d2f45d4a2649817
-    const percent = parseFloat(lockedYieldz) / parseFloat(totalSupply);
-    setlockedPercent(Math.floor(percent * 100 * 100) / 100);
-    settotalSupply(parseFloat(totalSupply).toLocaleString());
-    setlockYieldz(parseFloat(lockedYieldz).toLocaleString());
-    setTotalStakers(totalStakers);
-    setDistributedCore(distCores);
-    setDistributedShdw(distShdws);
+   
   };
 
   return (
@@ -112,8 +26,8 @@ const Dashboard = () => {
           <div className="align-middle border-[1px] bg-[#1C1C1C]/[.6]  border-white/10 backdrop-blur-md rounded-2xl">
             {/* Current Statistic Started */}
 
-            <div className="grid grid-cols-3 gap-4 justify-around pt-6 pb-[21px] m-2">
-              <div className="flex flex-row ">
+            <div className="justify-around pt-6 pb-[21px] m-2">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -124,8 +38,8 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">
-                    Total Staked VP
+                  <h4 className="text-white text-[20px] m-auto">
+                    Total staked VPUMPY Token 
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {totalSupply} $YZ */}
@@ -133,7 +47,7 @@ const Dashboard = () => {
                   </h4>
                 </div>
               </div>
-              <div className="flex flex-row ">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -144,15 +58,15 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">
-                    Your Staked NFT1{" "}
+                  <h4 className="text-white text-[20px] m-auto">
+                    Total staked VPUMPY NFT 1
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {lockYieldz} $VP */} {"0"}
                   </h4>
                 </div>
               </div>
-              <div className="flex flex-row ">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -163,13 +77,13 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">Your Staked NFT2</h4>
+                  <h4 className="text-white text-[20px] m-auto">Total staked VPUMPY NFT 2</h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
-                    {/* $ {marketCap} */}    {"0"}
+                    {"0"}
                   </h4>
                 </div>
               </div>
-              <div className="flex flex-row ">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -180,8 +94,8 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">
-                    Total Staked VP
+                  <h4 className="text-white text-[20px] m-auto">
+                    Your staked VPUMPY Token 
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {totalSupply} $YZ */}
@@ -189,7 +103,7 @@ const Dashboard = () => {
                   </h4>
                 </div>
               </div>
-              <div className="flex flex-row ">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -200,15 +114,15 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">
-                    Your Staked{" "}
+                  <h4 className="text-white text-[20px] m-auto">
+                    Your staked VPUMPY NFT 1
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {lockYieldz} $VP */} {"0"}
                   </h4>
                 </div>
               </div>
-              <div className="flex flex-row ">
+              <div className="flex flex-row py-3">
                 <div className="align-middle border-[1px] rounded-lg bg-white/5  border-white/10 my-auto w-[60px] h-[60px] flex">
                   <Image
                     className="z-[-9999] top-0 right-0 m-auto"
@@ -219,9 +133,9 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[14px] m-auto">Total Staked NFT1</h4>
+                  <h4 className="text-white text-[20px] m-auto">Your staked VPUMPY NFT 2</h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
-                    {marketCap}
+                    0
                   </h4>
                 </div>
               </div>

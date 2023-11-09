@@ -67,14 +67,8 @@ const TitleSection = () => {
           </h2>
         </Fade>
         <div className="justify-center block">
-          <TraButton className=" w-[156px] h-[56px] font-bold mt-10 min-[1020px]:hidden block m-auto ">
-            Docs
-          </TraButton>
-          <GraButton className=" w-[156px] h-[56px] font-bold mt-10 min-[1020px]:hidden block m-auto ">
-            Dapp
-          </GraButton>
           <GraButton className="w-[156px] h-[56px] font-bold block m-auto mt-5">
-            <Link href="">
+            <Link href="/dashboard">
               Stake
             </Link>
           </GraButton>

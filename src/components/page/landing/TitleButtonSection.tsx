@@ -17,13 +17,13 @@ const TileButtonSection = (props: Props) => {
           <ConnectCard
             title="VPUMPY NFT STAKING "
             iconUrl="/icon/auto_shaking.svg"
-            contents="Stake your VPUMPY NFT on Ventory here to boast your APY"
+            contents="Stake your VPUMPY NFT on Ventory here to boost your APY"
 
           />
           <ConnectCard
             title="VPUMPY NFT STAKING "
             iconUrl="/icon/rewarding.svg"
-            contents="Stake your VPUMPY NFT on VenomArt here to boasts your APY"
+            contents="Stake your VPUMPY NFT on VenomArt here to boost your APY"
           />
         </div>
       </Fade>

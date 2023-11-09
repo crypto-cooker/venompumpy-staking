@@ -3,7 +3,7 @@ import _json_BYIELDZ from "../constant/byieldzabi.json";
 import _json_STAKE from "../constant/stakeabi.json";
 
 // Chain ID
-export const CHAIN_ID = 1116; //Core Chain Mainnet
+export const CHAIN_ID = 1116; 
 // export const CHAIN_ID = 97  //bscscan Chain testnet
 
 //API URL

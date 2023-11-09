@@ -8,11 +8,7 @@ import Link from "next/link";
 import TitleSection from "@/components/page/landing/TitleSection";
 import TileButtonSection from "@/components/page/landing/TitleButtonSection";
 import EcoSystemSection from "@/components/page/landing/EcoSystemSection";
-import CoinSection from "@/components/page/landing/CoinSection";
-import ZeroEmission from "@/components/page/landing/ZeroEmission";
-import OverViewSection from "@/components/page/landing/OverViewSection";
 import SupportSection from "@/components/page/landing/SupportSection";
-import JoinSection from "@/components/page/landing/JoinSection";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { useRouter } from "next/router";
 
@@ -40,10 +36,6 @@ export default function Home() {
         <TitleSection />
         <TileButtonSection />
         <EcoSystemSection />
-        <ZeroEmission />
-        <OverViewSection />
-        <CoinSection />
-        <JoinSection />
         <SupportSection />
         <ScrollToTop />
       </main>
