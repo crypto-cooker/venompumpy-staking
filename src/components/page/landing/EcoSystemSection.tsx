@@ -8,13 +8,7 @@ interface Props { }
 const EcoSystemSection = (props: Props) => {
   return (
     <section className="third-panel relative w-full z-2 p-8">
-      <Image
-        className="z-[-9999] absolute top-40 right-[-300px] object-cover"
-        src="./images/Looper-3.svg"
-        alt="slider pannel"
-        width={1020}
-        height={500}
-      />
+      
       <Fade triggerOnce direction="right" duration={2000}>
         <div className="justify-center md:p-36 py-24 mx-10 md:items-center md:px-8">
           <h2 className="lg:text-[50px]  md:text-[40px] sm:text-[30px] text-[20px] text-white font-bold text-center">

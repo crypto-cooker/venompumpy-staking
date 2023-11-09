@@ -11,13 +11,6 @@ interface Props { }
 const SupportSection = (props: Props) => {
   return (
     <section className="relative mt-20 support">
-      <Image
-        className="z-[-9999] absolute bottom-[0px] w-[100vw] object-cover"
-        src="./images/circles.svg"
-        alt="slider pannel"
-        width={500}
-        height={500}
-      />
       <div className={styles.gradient3}></div>
       <div className="grid grid-cols-3 px-32 mb-20 md:py-10">
         <div className="md:px-16 px-0 md:w-[30%] w-[100%] mt-10">

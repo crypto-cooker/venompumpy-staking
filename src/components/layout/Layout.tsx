@@ -22,13 +22,6 @@ export const Layout = ({ children,color }: LayoutProps) => {
     <>
       <Header color={color} />
       <div className="flex w-[100vw]">
-        <Image
-          className="z-[-2] fixed top-[-376px] left-0"
-          src={`./images/back_gra${color ? "_p.svg" : ".svg"}`}
-          alt="slider pannel"
-          width={1760}
-          height={1079}
-        />
         <Sidebar color={color} />
         <Container>{children}</Container>
       </div>
