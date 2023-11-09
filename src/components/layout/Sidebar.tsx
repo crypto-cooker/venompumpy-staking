@@ -28,7 +28,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
           />
         </div>
       </div>
-      <ul className="max-md:hidden md:w-[250px] md:sticky md:top-3 md:z-0 md:h-[100%] md:-translate-x-0 md:mt-6 md:ml-6">
+      <ul className="max-md:hidden md:w-[300px] md:sticky md:top-3 md:z-0 md:h-[100%] md:-translate-x-0 md:mt-6 md:ml-6">
         {MenuItems.map((item, index) => {
           return (
             <MenuItem
@@ -77,7 +77,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
                 height={24}
               />
               <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                STAKE VPUMPY TOKEN
+                STAKE VPUMPY
               </h2>
             </Link>
             <Link

@@ -10,7 +10,7 @@ export const MenuItems: NavItem[] = [
     icon: "./images/dasboardicon.svg",
   },
   {
-    label: "STAKE VPUMPY TOKEN",
+    label: "STAKE VPUMPY",
     href: "/lockYZ",
     icon: "./images/Lock.svg",
   },
