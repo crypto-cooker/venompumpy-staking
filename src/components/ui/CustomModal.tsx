@@ -4,9 +4,7 @@ import { FC } from "react";
 const data = {
   title: ["Early Unlock Fee", "Claim Lock Time", "successfully bonded"],
   content: [
-    "Note: You may be subject to a fee if you wish to unstake & withdraw your Yieldz tokens early.",
-    "The lock period is not over ! Once it has expired, you can claim the rewards you have earned so far.",
-    "Your withdrawable bonding rewards will be updated and claimable in every 6 hours!",
+    ""
   ],
   btn: [["Close", "Confirm"], "Confirm", "Confirm"],
   display: ["Current fee:", "Time Lock:", "Claim in:"],

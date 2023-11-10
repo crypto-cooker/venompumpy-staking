@@ -95,7 +95,7 @@ const Dashboard = () => {
                 </div>
                 <div className="m-auto ml-2">
                   <h4 className="text-white text-[20px] m-auto">
-                    Your staked VPUMPY Token 
+                    My staked VPUMPY Token 
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {totalSupply} $YZ */}
@@ -115,7 +115,7 @@ const Dashboard = () => {
                 </div>
                 <div className="m-auto ml-2">
                   <h4 className="text-white text-[20px] m-auto">
-                    Your staked VPUMPY NFT 1
+                    My staked VPUMPY NFT 1
                   </h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     {/* {lockYieldz} $VP */} {"0"}
@@ -133,7 +133,7 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="m-auto ml-2">
-                  <h4 className="text-white text-[20px] m-auto">Your staked VPUMPY NFT 2</h4>
+                  <h4 className="text-white text-[20px] m-auto">My staked VPUMPY NFT 2</h4>
                   <h4 className="text-white font-semibold uppercase text-[24px] m-auto">
                     0
                   </h4>
