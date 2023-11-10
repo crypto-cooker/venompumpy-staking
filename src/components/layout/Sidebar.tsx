@@ -118,7 +118,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
               className="flex align-middle cursor-pointer mt-[20px] ml-8 hover:bg-[url('/images/${btnBack}')] active:bg-[url('/images/${btnBack}')] active:hue-rotate-90 bg-no-repeat bg-left-top w-[233px] h-[56px] py-[16px] pl-[25px]"
             >
               <Image
-                src="./images/bond.svg"
+                src="./images/Bond.svg"
                 alt="logo"
                 className=""
                 width={24}
