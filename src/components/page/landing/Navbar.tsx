@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import GraButton, { TraButton } from "../../common/Buttons";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
   // const [hideOnScroll, setHideOnScroll] = useState(true);
 
