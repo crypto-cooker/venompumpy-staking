@@ -109,9 +109,25 @@ const Sidebar: FC<props> = ({ color }: props) => {
                 height={24}
               />
               <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                APY BOOSTER
+                Apy Booster
               </h2>
             </Link>
+            <a
+              href="https://privatesale.venompumpy.com/"
+              target="_blank"
+              className="flex align-middle cursor-pointer mt-[20px] ml-8 hover:bg-[url('/images/${btnBack}')] active:bg-[url('/images/${btnBack}')] active:hue-rotate-90 bg-no-repeat bg-left-top w-[233px] h-[56px] py-[16px] pl-[25px]"
+            >
+              <Image
+                src="./images/bond.svg"
+                alt="logo"
+                className=""
+                width={24}
+                height={24}
+              />
+              <h2 className="text-white text-[18px] font-medium ml-[19px]">
+                VPumpy Presale
+              </h2>
+            </a>
             <p
               className="fixed right-10 top-10 text-[40px]"
               onClick={() => setBaropen(false)}

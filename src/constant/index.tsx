@@ -24,4 +24,9 @@ export const MenuItems: NavItem[] = [
     href: "/boosted",
     icon: "./images/Boosted.svg",
   },
+  {
+    label: "VPumpy Presale",
+    href: "no",
+    icon: "./images/bond.svg",
+  },
 ];
