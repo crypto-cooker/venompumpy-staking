@@ -12,7 +12,7 @@ const SupportSection = (props: Props) => {
   return (
     <section className="relative mt-20 support">
       <div className={styles.gradient3}></div>
-      <div className="grid grid-cols-3 px-32 mb-20 md:py-10">
+      <div className="grid grid-cols-2 md:px-32 mb-20 md:py-10">
         <div className="md:px-16 px-0 md:w-[30%] w-[100%] mt-10">
           <h2 className="text-[14px] text-[#898CA9]">
             ©2023 VENOMPUMPY, All right reserved.
