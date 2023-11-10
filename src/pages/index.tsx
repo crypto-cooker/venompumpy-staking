@@ -11,6 +11,7 @@ import EcoSystemSection from "@/components/page/landing/EcoSystemSection";
 import SupportSection from "@/components/page/landing/SupportSection";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { useRouter } from "next/router";
+import PresaleSection from "@/components/page/landing/PresaleSection";
 
 // Landing Page
 const inter = Inter({ subsets: ["latin"] });
@@ -36,6 +37,7 @@ export default function Home() {
         <TitleSection />
         <TileButtonSection />
         <EcoSystemSection />
+        <PresaleSection />
         <SupportSection />
         <ScrollToTop />
       </main>
