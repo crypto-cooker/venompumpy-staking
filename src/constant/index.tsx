@@ -10,28 +10,18 @@ export const MenuItems: NavItem[] = [
     icon: "./images/dasboardicon.svg",
   },
   {
-    label: "STAKE VPUMPY",
+    label: "Stake VPumpy",
     href: "/lockYZ",
     icon: "./images/Lock.svg",
   },
   {
-    label: "Stakelist",
+    label: "Stake List",
     href: "/stakelist",
     icon: "./images/stakelist.svg",
   },
   {
-    label: "Boost APY",
+    label: "Apy Booster",
     href: "/boosted",
     icon: "./images/Boosted.svg",
   },
-  // {
-  //   label: "Bond",
-  //   href: "/bonded",
-  //   icon: "./images/Bond.svg",
-  // },
-  // {
-  //   label: "Governence",
-  //   href: "/#",
-  //   icon: "./images/Governence.svg",
-  // },
 ];

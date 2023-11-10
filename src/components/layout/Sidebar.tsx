@@ -77,7 +77,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
                 height={24}
               />
               <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                STAKE VPUMPY
+                Stake VPumpy
               </h2>
             </Link>
             <Link
@@ -109,39 +109,7 @@ const Sidebar: FC<props> = ({ color }: props) => {
                 height={24}
               />
               <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                Boosted VM
-              </h2>
-            </Link>
-            <Link
-              href="/bonded"
-              className="flex align-middle cursor-pointer mt-[20px] ml-8 hover:bg-[url('/images/${btnBack}')] active:bg-[url('/images/${btnBack}')] active:hue-rotate-90 bg-no-repeat bg-left-top w-[233px] h-[56px] py-[16px] pl-[25px]"
-              onClick={() => setBaropen(false)}
-            >
-              <Image
-                src="./images/Bond.svg"
-                alt="logo"
-                className=""
-                width={24}
-                height={24}
-              />
-              <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                Bond
-              </h2>
-            </Link>
-            <Link
-              href="#"
-              className="flex align-middle cursor-pointer mt-[20px] ml-8 hover:bg-[url('/images/${btnBack}')] active:bg-[url('/images/${btnBack}')] active:hue-rotate-90 bg-no-repeat bg-left-top w-[233px] h-[56px] py-[16px] pl-[25px]"
-              onClick={() => setBaropen(false)}
-            >
-              <Image
-                src="./images/Governence.svg"
-                alt="logo"
-                className=""
-                width={24}
-                height={24}
-              />
-              <h2 className="text-white text-[18px] font-medium ml-[19px]">
-                Governence
+                APY BOOSTER
               </h2>
             </Link>
             <p
