@@ -20,7 +20,7 @@ const myround = (amount: string) => {
 export const Layout = ({ children,color }: LayoutProps) => {
   return (
     <>
-      <Header color={color} />
+      <Header />
       <div className="flex w-[100vw]">
         <Sidebar color={color} />
         <Container>{children}</Container>
