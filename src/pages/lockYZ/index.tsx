@@ -1,5 +1,4 @@
 import GraButton from "@/components/common/Buttons";
-import Image from "next/image";
 import { useState} from "react";
 import Head from "next/head";
 
@@ -9,10 +8,6 @@ const LockYZ = () => {
   const handleChange = (event) => {
     const val = event.target.value;
     setstakeAmount(val);
-  };
-
-
-  const getBalance = async () => {
   };
 
   const onStake = async () => {

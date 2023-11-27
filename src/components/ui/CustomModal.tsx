@@ -1,14 +1,6 @@
 import React, { useEffect } from "react";
 import { FC } from "react";
 
-const data = {
-  title: ["Early Unlock Fee", "Claim Lock Time", "successfully bonded"],
-  content: [
-    ""
-  ],
-  btn: [["Close", "Confirm"], "Confirm", "Confirm"],
-  display: ["Current fee:", "Time Lock:", "Claim in:"],
-};
 interface ModalProps {
   index: number;
   open:any;
