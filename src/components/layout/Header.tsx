@@ -17,7 +17,6 @@ const Header = () => {
   }, []);
 
   const connectWallet = async () => {
-    console.log("ASDF")
     if(!venomConnect) return;
     await venomConnect.connect();
   }
